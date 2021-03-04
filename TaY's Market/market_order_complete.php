@@ -1,4 +1,5 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
 ?>
@@ -14,12 +15,15 @@ session_regenerate_id();
   <title>注文完了 | TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -45,6 +49,7 @@ session_regenerate_id();
         </li>
       </ul>
 
+        <!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -53,6 +58,8 @@ session_regenerate_id();
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -66,6 +73,9 @@ session_regenerate_id();
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
+        <!--カートのアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -74,9 +84,13 @@ session_regenerate_id();
               <a class="dropdown-item" href="market_cart_view.php">カートを見る</a>
           </div>
         </li>
+        <!--/カートのアイコンにマウスを乗せた際の動き-->
+
     </ul>
   </div>
 </nav>
+<!--/ナビゲーションバー -->
+
 <!--パンくずリスト-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb container">
@@ -93,7 +107,7 @@ session_regenerate_id();
 <?php
 
 try{
-
+//エスケープ処理
 require_once('function/function.php');
 
 $post=escape($_POST);
@@ -120,6 +134,7 @@ $cart = $_SESSION['cart'];
 $unit = $_SESSION['unit'];
 $max = count($cart);
 
+//DBアクセス
 require_once('DB/dbaccess.php');
 
 //カートの中の個数分表示
@@ -186,6 +201,8 @@ for($i = 0;$i < $max; $i ++){
 </div>
 
 <?php
+//未実装機能
+
 /*
 $text = '';
 $text.=$cus_name."様\n\nこの度はご注文ありがとうございました。\n";
@@ -320,8 +337,11 @@ mb_language('Japanese');
 mb_internal_encoding('UTF-8');
 mb_send_mail('info@taysmarket.co.jp',$title,$text,$header);
 */
+
+//注文完了後にカート内の商品を初期化
 require_once('market_cart_clear.php');
 }catch(Exception $e){
+  //エラー処理
   require_once('ERROR/error.log.php');
 }
 

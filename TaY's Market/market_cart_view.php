@@ -1,4 +1,5 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
 ?>
@@ -15,12 +16,15 @@ session_regenerate_id();
   <title>カート | TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -46,6 +50,7 @@ session_regenerate_id();
         </li>
       </ul>
 
+      <!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -54,6 +59,8 @@ session_regenerate_id();
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -67,6 +74,9 @@ session_regenerate_id();
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
+        <!--カートのアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -75,9 +85,12 @@ session_regenerate_id();
               <a class="dropdown-item" href="market_cart_view.php">カートを見る</a>
           </div>
         </li>
+        <!--/カートのアイコンにマウスを乗せた際の動き-->
     </ul>
   </div>
 </nav>
+<!--/ナビゲーションバー -->
+
 <!--パンくずリスト-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb container">
@@ -91,6 +104,7 @@ session_regenerate_id();
 </nav>
 <!--/パンくずリスト-->
 <main>
+  <!--商品の個数変更に関する表示-->
   <?php
     if($_SESSION['unit_error'] == 1){
     echo '<div class="text-center">';
@@ -109,6 +123,8 @@ session_regenerate_id();
       $_SESSION['unit_error'] = 0;
     }
   ?>
+  <!--/商品の個数変更に関する表示-->
+
   <div class="py-4">
     <div class="container">
       <div class="row p-3">
@@ -120,7 +136,7 @@ session_regenerate_id();
           <?php
 
           try{
-
+            //カートに商品が入っているか確認
           if(isset($_SESSION['cart']) == true){
 
             $cart = $_SESSION['cart'];
@@ -130,15 +146,17 @@ session_regenerate_id();
           }else{
           $max = 0;
           }
+          //入っていない場合
             if($max == 0){
               echo 'カートに商品が入っていません。<br/>';
               echo '<br/>';
               echo '<a href="index.php" class="btn btn-secondary">戻る</a>';
               exit();
             }
-
+            //DBアクセス
             require('DB/dbaccess.php');
 
+            //カート内の商品を取り出す
           foreach ($cart as $key => $value) {
             $sql = 'SELECT code,name,price,picture FROM item WHERE code = ?';
             $stmt = $dbh->prepare($sql);
@@ -149,6 +167,8 @@ session_regenerate_id();
 
             $item_name[] = $record['name'];
             $item_price[] = $record['price'];
+            
+            //商品画像があるか確認
             if($record['picture'] == ''){
               $item_picture[]='';
             }else{
@@ -157,8 +177,8 @@ session_regenerate_id();
            }
 
           $dbh = null;
-
-          }catch(Exception $e){
+          //DBアクセスエラー処理
+        }catch(Exception $e){
             require_once('ERROR/error.log.php');
           }
           ?>
@@ -172,6 +192,7 @@ session_regenerate_id();
               <td>小計</td>
               <td>削除</td>
             </tr>
+            <!--カート内の商品表示-->
           <?php for($i = 0;$i < $max;$i ++){ ?>
             <tr>
               <td><?php echo $item_name[$i]; ?></td>
@@ -190,6 +211,7 @@ session_regenerate_id();
   </form>
   <br/>
 
+  <!--ログイン状況により購入手続き表示を変える-->
   <?php
     if(isset($_SESSION["member_login"]) == true){
       echo '<a href="market_order_confirm.php" class="btn btn-info">ご購入手続きへ進む</a><br/>';

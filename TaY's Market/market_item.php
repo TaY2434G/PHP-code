@@ -1,4 +1,5 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
 ?>
@@ -14,12 +15,15 @@ session_regenerate_id();
   <title>ログイン | TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -45,6 +49,7 @@ session_regenerate_id();
         </li>
       </ul>
 
+      <!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -53,6 +58,8 @@ session_regenerate_id();
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -66,6 +73,8 @@ session_regenerate_id();
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -77,6 +86,8 @@ session_regenerate_id();
     </ul>
   </div>
 </nav>
+<!--/ナビゲーションバー -->
+
 <!--パンくずリスト-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb container">
@@ -93,10 +104,12 @@ session_regenerate_id();
   <?php
 
   try{
+    //受け取った商品コード
     $item_code = $_GET['itemcode'];
-
+    //DBアクセス
     require_once('DB/dbaccess.php');
 
+    //商品コードを元に商品データを取得
     $sql = 'SELECT name,price,picture,comment FROM item WHERE code=?';
     $stmt = $dbh->prepare($sql);
     $data[]=$item_code;
@@ -110,6 +123,7 @@ session_regenerate_id();
 
     $dbh = null;
 
+    //商品画像があるかチェック
     if($item_picture_name == ''){
       $disp_picture='';
     }else{
@@ -117,10 +131,12 @@ session_regenerate_id();
     }
     //echo '<a href="market_cart.php?itemcode='.$item_code.'">カートに入れる</a><br/><br/>';
   }catch(Exception $e){
+    //エラー処理
     require_once('ERROR/error.log.php');
   }
   ?>
-
+  
+<!--商品情報表示-->
   <div class="py-4 bg-light">
     <section id="about">
       <div class="container">
@@ -141,6 +157,8 @@ session_regenerate_id();
       </div>
     </section>
   </div>
+  <!--/商品情報表示-->
+
 </main>
 <footer class="py-4 bg-dark text-light">
   <div class="container text-center">

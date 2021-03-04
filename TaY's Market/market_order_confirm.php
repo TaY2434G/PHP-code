@@ -1,4 +1,5 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
 ?>
@@ -14,12 +15,15 @@ session_regenerate_id();
   <title>注文 | TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -45,6 +49,7 @@ session_regenerate_id();
         </li>
       </ul>
 
+        <!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -53,6 +58,8 @@ session_regenerate_id();
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -66,6 +73,9 @@ session_regenerate_id();
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
+        <!--カートのアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -74,9 +84,13 @@ session_regenerate_id();
               <a class="dropdown-item" href="market_cart_view.php">カートを見る</a>
             </div>
         </li>
+        <!--/カートのアイコンにマウスを乗せた際の動き-->
+
     </ul>
   </div>
 </nav>
+<!--/ナビゲーションバー -->
+
 <!--パンくずリスト-->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb container">
@@ -91,7 +105,7 @@ session_regenerate_id();
 <!--/パンくずリスト-->
 <main>
   <?php
-
+//会員情報を表示
   $code = $_SESSION['member_code'];
 
   require_once('DB/dbaccess.php');

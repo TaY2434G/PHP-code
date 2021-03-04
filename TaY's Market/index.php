@@ -1,6 +1,9 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
+
+//ログインした際の表示
 if($_SESSION['member_login'] == 1){
   echo '<div class="text-center">';
   echo '<div class="alert alert-success alert-dismissble fade show" role="alert">';
@@ -12,6 +15,8 @@ if($_SESSION['member_login'] == 1){
   echo '</div>';
   $_SESSION['member_login'] = 0;
 }
+
+//ログアウトした際の表示
 if($_GET['member_logout'] == 1){
   echo '<div class="text-center">';
   echo '<div class="alert alert-success alert-dismissble fade show" role="alert">';
@@ -23,6 +28,8 @@ if($_GET['member_logout'] == 1){
   echo '</div>';
   $_GET['member_logout'] = 0;
 }
+
+//すでにカートにある商品を追加した際の表示
 if($_SESSION['cart_error'] == 1){
   echo '<div class="text-center">';
   echo '<div class="alert alert-warning alert-dismissble fade show" role="alert">';
@@ -34,6 +41,8 @@ if($_SESSION['cart_error'] == 1){
   echo '</div>';
   $_SESSION['cart_error'] = 0;
 }
+
+//無事にカートに商品を追加したいの表示
 if($_SESSION['cart_success'] == 1){
   echo '<div class="text-center">';
   echo '<div class="alert alert-success alert-dismissble fade show" role="alert">';
@@ -45,9 +54,8 @@ if($_SESSION['cart_success'] == 1){
   echo '</div>';
   $_SESSION['cart_success'] = 0;
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -60,12 +68,15 @@ if($_SESSION['cart_success'] == 1){
   <title>TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -123,6 +134,7 @@ if($_SESSION['cart_success'] == 1){
     </ul>
   </div>
 </nav>
+<!--/ナビゲーションバー -->
 
 <main>
   <!--メイン-->
@@ -185,7 +197,7 @@ if($_SESSION['cart_success'] == 1){
           <div class="col-md-2">
             <h3>News</h3>
           </div>
-
+          <!--ニュース一覧 -->
           <div class="col-md-10">
             <dl class="row">
               <dt class="col-md-3">2021年1月23日</dt>
@@ -196,6 +208,7 @@ if($_SESSION['cart_success'] == 1){
               <dd class="col-md-9">【重要】メンテナンスのお知らせ</dd>
             </dl>
           </div>
+          <!--/ニュース一覧 -->
         </div>
       </div>
     </section>
@@ -205,7 +218,7 @@ if($_SESSION['cart_success'] == 1){
   <div class="py-4 bg-light">
     <section id="about">
       <div class="container">
-
+        <!--店舗説明情報 -->
         <div class="row mb-4">
           <div class="col-md-8 mb-3">
             <h3 class="mb-3">TaY's Marketについて</h3>
@@ -217,8 +230,9 @@ if($_SESSION['cart_success'] == 1){
             <img src="img/about_01.jpg" class="img-responsive">
           </div>
         </div>
-
+        <!--モーダル-->
         <div class="row">
+          <!--モーダル1-->
           <div class="col-md-4">
             <div class="card mb-3">
               <img src="img/about_02.jpeg" class="img-fluid">
@@ -230,6 +244,9 @@ if($_SESSION['cart_success'] == 1){
               </div>
             </div>
           </div>
+          <!--/モーダル1-->
+
+          <!--モーダル2-->
           <div class="col-md-4">
             <div class="card mb-3">
               <img src="img/about_03.jpeg" class="img-fluid">
@@ -242,6 +259,9 @@ if($_SESSION['cart_success'] == 1){
               </div>
             </div>
           </div>
+          <!--/モーダル2-->
+
+          <!--モーダル3-->
           <div class="col-md-4">
             <div class="card mb-3">
               <img src="img/about_04.jpeg" class="img-fluid">
@@ -254,8 +274,11 @@ if($_SESSION['cart_success'] == 1){
               </div>
             </div>
           </div>
+          <!--/モーダル-->
         </div>
+        <!--/モーダル-->
 
+        <!--モーダルフェード1-->
       <div class="modal fade" id="modal01" tabindex="-1" role="dialog" aria-labelledby="modal01-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -275,7 +298,9 @@ if($_SESSION['cart_success'] == 1){
          </div>
        </div>
      </div>
+     <!--/モーダルフェード1-->
 
+     <!--モーダルフェード2-->
      <div class="modal fade" id="modal02" tabindex="-1" role="dialog" aria-labelledby="modal01-label" aria-hidden="true">
        <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
@@ -295,7 +320,9 @@ if($_SESSION['cart_success'] == 1){
         </div>
       </div>
     </div>
+    <!--/モーダルフェード2-->
 
+    <!--モーダルフェード3-->
     <div class="modal fade" id="modal03" tabindex="-1" role="dialog" aria-labelledby="modal01-label" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -315,9 +342,14 @@ if($_SESSION['cart_success'] == 1){
        </div>
      </div>
     </div>
+    <!--/モーダルフェード3-->
+
       </div>
+      <!--店舗説明情報 -->
+
     </section>
   </div>
+
   <!--コンテンツ3-->
   <div class="py-4">
     <section id="item">
@@ -348,6 +380,7 @@ if($_SESSION['cart_success'] == 1){
                 <table class="table table-striped">
                   <tbody>
                     <?php
+                    //DBにアクセス
                     try {
                     require('DB/dbaccess.php');
 
@@ -357,6 +390,7 @@ if($_SESSION['cart_success'] == 1){
 
                     $dbh = null;
 
+                    //ジャンル1の商品の数だけ表示
                     while(ture){
                       $record = $stmt->fetch(PDO::FETCH_ASSOC);
                       if($record == false){
@@ -364,6 +398,7 @@ if($_SESSION['cart_success'] == 1){
                       } ?>
                       <tr>
                         <th><img src="item/picture/<?php echo $record['picture'] ; ?>" class="img-fluid"></th>
+                        <!-- 商品を選択すると詳細ページに飛ぶ-->
                         <th><?php echo '<a href="market_item.php?itemcode='.$record['code'].'">'; ?>
                             <br/>
                             <?php echo $record['name']; ?>
@@ -373,6 +408,7 @@ if($_SESSION['cart_success'] == 1){
                       </tr>
                     <?php }
 
+                    //DBアクセスのエラー処理
                     }catch (Exception $e) {
                     require_once('ERROR/error.log.php');
                     }
@@ -393,6 +429,7 @@ if($_SESSION['cart_success'] == 1){
                 <table class="table table-striped">
                   <tbody>
                     <?php
+                    //DBにアクセス
                     try {
                     require('DB/dbaccess.php');
 
@@ -401,7 +438,7 @@ if($_SESSION['cart_success'] == 1){
                     $stmt->execute();
 
                     $dbh = null;
-
+                    //ジャンル2の商品の数だけ表示
                     while(ture){
                       $record = $stmt->fetch(PDO::FETCH_ASSOC);
                       if($record == false){
@@ -409,6 +446,7 @@ if($_SESSION['cart_success'] == 1){
                       } ?>
                       <tr>
                         <th><img src="item/picture/<?php echo $record['picture'] ; ?>" class="img-fluid"></th>
+                        <!-- 商品を選択すると詳細ページに飛ぶ-->
                         <th><?php echo '<a href="market_item.php?itemcode='.$record['code'].'">'; ?>
                             <br/>
                             <?php echo $record['name']; ?>
@@ -418,6 +456,7 @@ if($_SESSION['cart_success'] == 1){
                       </tr>
                     <?php }
 
+                    //DBアクセスのエラー処理
                     }catch (Exception $e) {
                     require_once('ERROR/error.log.php');
                     }
@@ -438,6 +477,7 @@ if($_SESSION['cart_success'] == 1){
                 <table class="table table-striped">
                   <tbody>
                     <?php
+                    //DBにアクセス
                     try {
                     require('DB/dbaccess.php');
 
@@ -446,7 +486,7 @@ if($_SESSION['cart_success'] == 1){
                     $stmt->execute();
 
                     $dbh = null;
-
+                    //ジャンル3の商品の数だけ表示
                     while(ture){
                       $record = $stmt->fetch(PDO::FETCH_ASSOC);
                       if($record == false){
@@ -454,6 +494,7 @@ if($_SESSION['cart_success'] == 1){
                       } ?>
                       <tr>
                         <th><img src="item/picture/<?php echo $record['picture'] ; ?>" class="img-fluid"></th>
+                        <!-- 商品を選択すると詳細ページに飛ぶ-->
                         <th><?php echo '<a href="market_item.php?itemcode='.$record['code'].'">'; ?>
                             <br/>
                             <?php echo $record['name']; ?>
@@ -463,6 +504,7 @@ if($_SESSION['cart_success'] == 1){
                       </tr>
                     <?php }
 
+                    //DBアクセスのエラー処理
                     }catch (Exception $e) {
                     require_once('ERROR/error.log.php');
                     }
@@ -483,6 +525,7 @@ if($_SESSION['cart_success'] == 1){
                 <table class="table table-striped">
                   <tbody>
                     <?php
+                    //DBにアクセス
                     try {
                     require('DB/dbaccess.php');
 
@@ -491,7 +534,7 @@ if($_SESSION['cart_success'] == 1){
                     $stmt->execute();
 
                     $dbh = null;
-
+                    //ジャンル4の商品の数だけ表示
                     while(ture){
                       $record = $stmt->fetch(PDO::FETCH_ASSOC);
                       if($record == false){
@@ -499,6 +542,7 @@ if($_SESSION['cart_success'] == 1){
                       } ?>
                       <tr>
                         <th><img src="item/picture/<?php echo $record['picture'] ; ?>" class="img-fluid"></th>
+                        <!-- 商品を選択すると詳細ページに飛ぶ-->
                         <th><?php echo '<a href="market_item.php?itemcode='.$record['code'].'">'; ?>
                             <br/>
                             <?php echo $record['name']; ?>
@@ -508,6 +552,7 @@ if($_SESSION['cart_success'] == 1){
                       </tr>
                     <?php }
 
+                    //DBアクセスのエラー処理
                     }catch (Exception $e) {
                     require_once('ERROR/error.log.php');
                     }

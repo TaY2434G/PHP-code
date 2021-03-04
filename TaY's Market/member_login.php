@@ -1,4 +1,5 @@
 <?php
+//セッション開始
 session_start();
 session_regenerate_id();
 if($_SESSION['register_flag'] == 1){
@@ -25,12 +26,15 @@ if($_SESSION['register_flag'] == 1){
   <title>ログイン | TaY's Market</title>
 </head>
 <body>
+  <!--マーケットのロゴ -->
 <header class="py-4">
   <div class="container text-center">
     <hi><a href="index.php"><img src="img/market_logo.png" class="img-responsive" alt="TaY's Market"></a></h1>
   </div>
 </header>
+<!--/マーケットのロゴ -->
 
+<!--ナビゲーションバー -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
   <div class="container">
     <a class="navbar-brand" href="index.php">TaY's Market</a>
@@ -56,6 +60,7 @@ if($_SESSION['register_flag'] == 1){
         </li>
       </ul>
 
+        <!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -64,6 +69,8 @@ if($_SESSION['register_flag'] == 1){
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -77,6 +84,9 @@ if($_SESSION['register_flag'] == 1){
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
+        <!--カートのアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -85,6 +95,8 @@ if($_SESSION['register_flag'] == 1){
               <a class="dropdown-item" href="market_cart_view.php">カートを見る</a>
           </div>
         </li>
+        <!--/カートのアイコンにマウスを乗せた際の動き-->
+
     </ul>
   </div>
 </nav>
@@ -99,8 +111,11 @@ if($_SESSION['register_flag'] == 1){
     </li>
   </ol>
 </nav>
+<!--/ナビゲーションバー -->
+
 <!--/パンくずリスト-->
 <main>
+  <!--ログインに失敗した際の表示-->
   <?php if($_SESSION['error_flag'] == 1){
     echo '<div class="text-center">';
     echo '<div class="alert alert-warning" role="alert">';
