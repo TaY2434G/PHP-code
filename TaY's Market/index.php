@@ -102,6 +102,7 @@ if($_SESSION['cart_success'] == 1){
         </li>
       </ul>
 
+<!--ログインしていたら名前を表示。それ以外はゲスト表示-->
       <ul class="navbar-nav">
         <span class="navbar-text" style="color: #fff;">
           <?php if(isset($_SESSION['member_name'])==false){
@@ -110,6 +111,8 @@ if($_SESSION['cart_success'] == 1){
           echo $_SESSION['member_name'].'　様　';
           } ?>
         </span>
+
+        <!--歯車のアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-cogs fa-1x" style="color: #fff;"></i>
@@ -123,6 +126,9 @@ if($_SESSION['cart_success'] == 1){
           } ?>
           </div>
         </li>
+        <!--/歯車のアイコンにマウスを乗せた際の動き-->
+
+        <!--カートのアイコンにマウスを乗せた際の動き-->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-shopping-cart fa-1x" style="color: #fff;"></i>
@@ -131,6 +137,7 @@ if($_SESSION['cart_success'] == 1){
               <a class="dropdown-item" href="market_cart_view.php">カートを見る</a>
           </div>
         </li>
+        <!--/カートのアイコンにマウスを乗せた際の動き-->
     </ul>
   </div>
 </nav>
